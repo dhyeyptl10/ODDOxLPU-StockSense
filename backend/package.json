@@ -1,0 +1,24 @@
+{
+  "name": "coreinventory-backend",
+  "version": "1.0.0",
+  "description": "CoreInventory Backend \u00e2\u20ac\u201d Express + node:sqlite + JWT",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --experimental-sqlite --watch server.js",
+    "start": "node --experimental-sqlite server.js",
+    "seed": "node --experimental-sqlite db/seed.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.7",
+    "uuid": "^9.0.1"
+  }
+}

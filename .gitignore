@@ -1,0 +1,6 @@
+node_modules/
+.env
+db/coreinventory.db
+db/coreinventory.db-wal
+db/coreinventory.db-shm
+*.log

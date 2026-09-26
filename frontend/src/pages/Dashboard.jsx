@@ -20,7 +20,12 @@ function BarTip({ active, payload, label }) {
 
 export default function Dashboard({ s }) {
   const TREND = (s.dashboard?.movementTrend || []).map(r => ({ ...r, name: fDate(r.date) }))
-  const { products, receipts, deliveries, transfers, movements, warehouses } = s
+  const products   = s?.products   || []
+  const receipts   = s?.receipts   || []
+  const deliveries = s?.deliveries || []
+  const transfers  = s?.transfers  || []
+  const movements  = s?.movements  || []
+  const warehouses = s?.warehouses || []
 
   const totalUnits  = products.reduce((a, p) => a + totalStock(p), 0)
   const low         = products.filter(p => stockStatus(p) === 'low')
@@ -35,11 +40,11 @@ export default function Dashboard({ s }) {
   products.forEach(p => { byCat[p.category] = (byCat[p.category] || 0) + totalStock(p) })
   const pieD = Object.entries(byCat).filter(([, v]) => v > 0).map(([name, value]) => ({ name, value }))
 
-  // Warehouse stock summary
+  // Warehouse stock summary — p.stock is { wh1: qty, wh2: qty, ... }
   const whStockData = (warehouses || []).map(wh => {
     const qty = products.reduce((sum, p) => {
-      const st = (p.stock || []).find(s => s.warehouseId === wh.id)
-      return sum + (st ? st.qty : 0)
+      const stock = p.stock || {}
+      return sum + (stock[wh.id] || 0)
     }, 0)
     return { name: wh.name.replace(' Warehouse', '').replace(' Store', '').replace(' Floor', ''), units: qty }
   })

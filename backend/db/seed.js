@@ -41,29 +41,91 @@ warehouses.forEach(w => insWH.run(w.id, w.name, w.location, w.description))
 
 // ─── Products ─────────────────────────────────────────────────────────────────
 const products = [
-  { id:'p1', name:'Steel Rod',        sku:'STL-001', category:'Raw Materials', unit:'kg',     reorder_level:20  },
-  { id:'p2', name:'Office Chair',     sku:'CHR-001', category:'Furniture',     unit:'pieces', reorder_level:10  },
-  { id:'p3', name:'Conference Table', sku:'TBL-001', category:'Furniture',     unit:'pieces', reorder_level:5   },
-  { id:'p4', name:'M8 Screws',        sku:'SCW-001', category:'Spare Parts',   unit:'pieces', reorder_level:500 },
-  { id:'p5', name:'Industrial Paint', sku:'PNT-001', category:'Chemicals',     unit:'liters', reorder_level:50  },
-  { id:'p6', name:'Copper Wire',      sku:'COP-001', category:'Electronics',   unit:'meters', reorder_level:100 },
-  { id:'p7', name:'Packing Box L',    sku:'PKG-001', category:'Packaging',     unit:'pieces', reorder_level:100 },
-  { id:'p8', name:'Cotton Fabric',    sku:'CTN-001', category:'Textiles',      unit:'meters', reorder_level:200 },
+  // Raw Materials
+  { id:'p1',  name:'Steel Rod (10mm)',     sku:'STL-001', category:'Raw Materials',  unit:'kg',     reorder_level:50   },
+  { id:'p2',  name:'Aluminum Sheet',       sku:'ALM-001', category:'Raw Materials',  unit:'kg',     reorder_level:30   },
+  { id:'p3',  name:'Cement Bags (50kg)',   sku:'CMT-001', category:'Raw Materials',  unit:'bags',   reorder_level:100  },
+  { id:'p4',  name:'Iron Angle Bar',       sku:'IRN-001', category:'Raw Materials',  unit:'meters', reorder_level:40   },
+  // Furniture
+  { id:'p5',  name:'Office Chair Pro',     sku:'CHR-001', category:'Furniture',      unit:'pieces', reorder_level:10   },
+  { id:'p6',  name:'Executive Desk',       sku:'DSK-001', category:'Furniture',      unit:'pieces', reorder_level:5    },
+  { id:'p7',  name:'Conference Table 8P',  sku:'TBL-001', category:'Furniture',      unit:'pieces', reorder_level:3    },
+  { id:'p8',  name:'Filing Cabinet 4DR',   sku:'CAB-001', category:'Furniture',      unit:'pieces', reorder_level:5    },
+  // Electronics
+  { id:'p9',  name:'Copper Wire 2.5mm',    sku:'COP-001', category:'Electronics',    unit:'meters', reorder_level:200  },
+  { id:'p10', name:'LED Driver 40W',       sku:'LED-001', category:'Electronics',    unit:'pieces', reorder_level:20   },
+  { id:'p11', name:'CCTV Camera IP66',     sku:'CCV-001', category:'Electronics',    unit:'pieces', reorder_level:5    },
+  { id:'p12', name:'Power Strip 6-Port',   sku:'PWR-001', category:'Electronics',    unit:'pieces', reorder_level:15   },
+  // Spare Parts
+  { id:'p13', name:'M8 Hex Bolts',         sku:'BLT-001', category:'Spare Parts',    unit:'pieces', reorder_level:500  },
+  { id:'p14', name:'Ball Bearing 6205',    sku:'BRG-001', category:'Spare Parts',    unit:'pieces', reorder_level:50   },
+  { id:'p15', name:'V-Belt A50',           sku:'VBT-001', category:'Spare Parts',    unit:'pieces', reorder_level:30   },
+  { id:'p16', name:'Oil Seal 40x60',       sku:'OSL-001', category:'Spare Parts',    unit:'pieces', reorder_level:25   },
+  // Chemicals
+  { id:'p17', name:'Industrial Paint WH',  sku:'PNT-001', category:'Chemicals',      unit:'liters', reorder_level:50   },
+  { id:'p18', name:'Rust Remover 5L',      sku:'RST-001', category:'Chemicals',      unit:'liters', reorder_level:20   },
+  { id:'p19', name:'Cutting Fluid 20L',    sku:'CFL-001', category:'Chemicals',      unit:'liters', reorder_level:15   },
+  { id:'p20', name:'Epoxy Adhesive 1kg',   sku:'EPX-001', category:'Chemicals',      unit:'kg',     reorder_level:10   },
+  // Packaging
+  { id:'p21', name:'Packing Box Large',    sku:'PKG-001', category:'Packaging',      unit:'pieces', reorder_level:200  },
+  { id:'p22', name:'Bubble Wrap Roll',     sku:'BWR-001', category:'Packaging',      unit:'rolls',  reorder_level:30   },
+  { id:'p23', name:'Stretch Film 2kg',     sku:'STF-001', category:'Packaging',      unit:'rolls',  reorder_level:20   },
+  { id:'p24', name:'Duct Tape 48mm',       sku:'DTP-001', category:'Packaging',      unit:'rolls',  reorder_level:50   },
+  // Textiles & Safety
+  { id:'p25', name:'Cotton Fabric Grey',   sku:'CTN-001', category:'Textiles',       unit:'meters', reorder_level:200  },
+  { id:'p26', name:'Polyester Webbing',    sku:'PWB-001', category:'Textiles',       unit:'meters', reorder_level:100  },
+  { id:'p27', name:'Industrial Gloves L',  sku:'GLV-001', category:'Safety Gear',    unit:'pairs',  reorder_level:50   },
+  { id:'p28', name:'Safety Helmet White',  sku:'HLM-001', category:'Safety Gear',    unit:'pieces', reorder_level:20   },
 ]
 const insProd = db.prepare('INSERT INTO products (id,name,sku,category,unit,reorder_level,created_at) VALUES (?,?,?,?,?,?,?)')
-const dates = ['2024-01-10','2024-01-12','2024-01-15','2024-01-18','2024-01-20','2024-01-22','2024-01-25','2024-01-28']
-products.forEach((p,i) => insProd.run(p.id, p.name, p.sku, p.category, p.unit, p.reorder_level, dates[i]))
+const allDates = [
+  '2024-01-05','2024-01-06','2024-01-07','2024-01-08',
+  '2024-01-10','2024-01-11','2024-01-12','2024-01-13',
+  '2024-01-15','2024-01-16','2024-01-17','2024-01-18',
+  '2024-01-19','2024-01-20','2024-01-21','2024-01-22',
+  '2024-01-23','2024-01-24','2024-01-25','2024-01-26',
+  '2024-01-27','2024-01-28','2024-01-29','2024-01-30',
+  '2024-02-01','2024-02-02','2024-02-03','2024-02-04',
+]
+products.forEach((p, i) => insProd.run(p.id, p.name, p.sku, p.category, p.unit, p.reorder_level, allDates[i]))
 
 // ─── Product Stock (per warehouse) ────────────────────────────────────────────
 const stockData = {
-  p1: { wh1:97,  wh2:30,  wh3:0   },
-  p2: { wh1:45,  wh2:0,   wh3:20  },
-  p3: { wh1:12,  wh2:0,   wh3:3   },
-  p4: { wh1:2300,wh2:450, wh3:0   },
-  p5: { wh1:15,  wh2:0,   wh3:0   },
-  p6: { wh1:0,   wh2:0,   wh3:0   },
-  p7: { wh1:380, wh2:0,   wh3:50  },
-  p8: { wh1:8,   wh2:0,   wh3:0   },
+  // Raw Materials
+  p1:  { wh1:120, wh2:80,  wh3:0   },
+  p2:  { wh1:60,  wh2:40,  wh3:0   },
+  p3:  { wh1:0,   wh2:0,   wh3:0   },
+  p4:  { wh1:85,  wh2:30,  wh3:15  },
+  // Furniture
+  p5:  { wh1:45,  wh2:0,   wh3:22  },
+  p6:  { wh1:8,   wh2:0,   wh3:2   },
+  p7:  { wh1:12,  wh2:0,   wh3:3   },
+  p8:  { wh1:18,  wh2:0,   wh3:5   },
+  // Electronics
+  p9:  { wh1:0,   wh2:0,   wh3:0   },
+  p10: { wh1:35,  wh2:12,  wh3:0   },
+  p11: { wh1:14,  wh2:0,   wh3:4   },
+  p12: { wh1:22,  wh2:8,   wh3:0   },
+  // Spare Parts
+  p13: { wh1:2800,wh2:650, wh3:0   },
+  p14: { wh1:40,  wh2:20,  wh3:0   },
+  p15: { wh1:55,  wh2:15,  wh3:0   },
+  p16: { wh1:18,  wh2:0,   wh3:0   },
+  // Chemicals
+  p17: { wh1:15,  wh2:0,   wh3:0   },
+  p18: { wh1:28,  wh2:0,   wh3:0   },
+  p19: { wh1:22,  wh2:10,  wh3:0   },
+  p20: { wh1:12,  wh2:0,   wh3:0   },
+  // Packaging
+  p21: { wh1:450, wh2:0,   wh3:80  },
+  p22: { wh1:42,  wh2:0,   wh3:10  },
+  p23: { wh1:35,  wh2:0,   wh3:8   },
+  p24: { wh1:120, wh2:30,  wh3:0   },
+  // Textiles & Safety
+  p25: { wh1:15,  wh2:0,   wh3:0   },
+  p26: { wh1:180, wh2:0,   wh3:60  },
+  p27: { wh1:65,  wh2:20,  wh3:0   },
+  p28: { wh1:32,  wh2:10,  wh3:8   },
 }
 const insStock = db.prepare('INSERT INTO product_stock (product_id,warehouse_id,quantity) VALUES (?,?,?)')
 Object.entries(stockData).forEach(([pid, whs]) => {

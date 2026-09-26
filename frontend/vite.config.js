@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: { output: { manualChunks: { charts: ['recharts'], react: ['react','react-dom'] } } },
   },
   server: {
+    host: true,
     port: 5173,
     strictPort: true,
     proxy: {

@@ -12,7 +12,7 @@ Many organizations still rely on **manual registers, Excel sheets, or scattered 
 
 CoreInventory solves this by providing a **centralized, real-time, role-based web platform** where admins, managers, and warehouse staff can efficiently manage inventory operations.
 
----
+----
 
 # 📌 Problem Statement
 

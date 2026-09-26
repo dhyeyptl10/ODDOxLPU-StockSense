@@ -4,9 +4,9 @@ import { authAPI } from '../api.js'
 import Landing from './Landing.jsx'
 
 const ROLE_HINTS = {
-  admin:   { email: 'admin@coreinventory.com',   password: 'admin123',   label: 'Administrator',  color: '#00f0ff',  bg: 'rgba(0,240,255,.1)',  border: 'rgba(0,240,255,.3)',  icon: 'shield'   },
-  manager: { email: 'manager@coreinventory.com', password: 'manager123', label: 'Manager',        color: '#a78bfa',  bg: 'rgba(167,139,250,.1)',border: 'rgba(167,139,250,.3)', icon: 'activity' },
-  staff:   { email: 'staff@coreinventory.com',   password: 'staff123',   label: 'Warehouse Staff',color: '#10b981',  bg: 'rgba(16,185,129,.1)', border: 'rgba(16,185,129,.3)',  icon: 'box'      },
+  admin:   { email: 'admin@coreinventory.com',   password: 'admin123',   label: 'Administrator',  color: '#00dcff',  bg: 'rgba(0,220,255,.1)',   border: 'rgba(0,220,255,.28)',  icon: 'shield'   },
+  manager: { email: 'manager@coreinventory.com', password: 'manager123', label: 'Manager',        color: '#b48aff',  bg: 'rgba(180,138,255,.1)', border: 'rgba(180,138,255,.28)', icon: 'activity' },
+  staff:   { email: 'staff@coreinventory.com',   password: 'staff123',   label: 'Warehouse Staff',color: '#00e5a0',  bg: 'rgba(0,229,160,.1)',   border: 'rgba(0,229,160,.28)',  icon: 'box'      },
 }
 
 export default function Auth({ onLogin }) {
